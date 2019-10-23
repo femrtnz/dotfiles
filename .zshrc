@@ -29,6 +29,11 @@ export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
+############# K8s ###########
+export KUBECONFIG=$HOME/.kube/config
+alias k="kubectl"
+alias kc="kubectx"
+alias kn="kubens"
 
 ############# Google ###########
 alias g="gcloud"
@@ -54,7 +59,5 @@ kx(){
 }
 
 
-alias k="kubectl"
-alias kc="kubectx"
-alias kn="kubens"
+
 

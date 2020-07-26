@@ -1,0 +1,37 @@
+function gpset {
+  local bd=$( echo ${1} )
+  iterm2_set_user_var badge $bd
+  iterm2_set_user_var cluster ${2}
+  export CLOUDSDK_ACTIVE_CONFIG_NAME=${1}
+}
+
+function gpclear {
+  iterm2_set_user_var badge ""
+  unset CLOUDSDK_ACTIVE_CONFIG_NAME
+}
+
+function gplist {
+  gcloud config configurations list --format json | jq -r '.[].name'
+}
+
+function gpdel {
+  gpclear
+  gcloud config configurations delete ${1}
+}
+
+function gpcreate {
+  gcloud config configurations create ${2}
+  gpset ${2}
+  gcloud config set project ${2}
+  gcloud config set account ${1}
+  gcloud config configurations activate default
+}
+
+# ZSH completion reply
+function _gplist {
+  reply=($(gplist))
+}
+
+compctl -K _gplist gpset
+compctl -K _gplist gpdel
+

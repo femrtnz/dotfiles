@@ -13,9 +13,10 @@ add_to_path() {
 }
 
 add_to_path $HOME/bin
-
 add_to_path /usr/local/bin
-
+add_to_path $HOME/.tgenv/bin
+add_to_path ${HOME}/Library/Python/3.7/bin
+add_to_path ${HOME}/workspace/gitsync/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
@@ -35,6 +36,15 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+##### JENV ####
+# add_to_path $HOME/.jenv/bin
+# eval "$(jenv init -)"
+
+# ensure that JAVA_HOME is correct
+# jenv enable-plugin export
+# make Maven aware of the Java version in use (and switch when your project does)
+# jenv enable-plugin maven
+
 ############# FZF ############# 
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 # add support for ctrl+o to open selected file in VS Code
@@ -53,7 +63,7 @@ add_to_path ${HOME}/google-cloud-sdk/bin
 source ${HOME}/google-cloud-sdk/bin/completion.zsh.inc
 
 alias g="gcloud"
-
+source ${HOME}/.gcloud-config-badge
 
 ############ Terraform #########
 alias t="terraform"
@@ -63,6 +73,7 @@ alias t="terraform"
 gitlog() {
   git log --oneline --decorate --all --graph
 }
+git config --global core.excludesfile ~/.gitignore_global
 
 ############ K8s ##############
 
